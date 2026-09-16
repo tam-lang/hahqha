@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Baccarat Royal Casino VIP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            100: '#FFF9D6',
+                            300: '#FFE57F',
+                            400: '#FFD700',
+                            500: '#D4AF37',
+                            600: '#AA820A',
+                            700: '#856404'
+                        },
+                        felt: {
+                            dark: '#032012',
+                            light: '#0A4224',
+                            border: '#145A32'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        montserrat: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: radial-gradient(circle at center, #0B3C26 0%, #031C10 70%, #010A06 100%);
+            color: #ffffff;
+            user-select: none;
+            -webkit-user-select: none;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .gold-heading {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(180deg, #FFF6C5 0%, #FFD700 40%, #B8860B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 2px 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .gold-border {
+            border: 2px solid #D4AF37;
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .gold-button {
+            background: linear-gradient(180deg, #FFE57F 0%, #D4AF37 50%, #856404 100%);
+            color: #111;
+            font-weight: 800;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            transition: all 0.2s ease;
+        }
+
+        .gold-button:hover:not(:disabled) {
+            filter: brightness(1.15);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+        }
+
+        .gold-button:active:not(:disabled) {
+            transform: translateY(1px);
+        }
+
+        .gold-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            filter: grayscale(100%);
+        }
+
+        /* Baccarat Playing Cards Styling */
+        .card {
+            width: 62px;
+            height: 90px;
+            border-radius: 8px;
+            background: #fff;
+            color: #111;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 4px 6px;
+            font-weight: 800;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #ddd;
+        }
+
+        @media (min-width: 640px) {
+            .card {
+                width: 80px;
+                height: 115px;
+                padding: 6px 8px;
+                border-radius: 10px;
+            }
+        }
+
+        .card.red { color: #dc2626; }
+        .card.black { color: #111827; }
+
+        .card-back {
+            background: repeating-linear-gradient(
+                45deg,
+                #991b1b,
+                #991b1b 10px,
+                #7f1d1d 10px,
+                #7f1d1d 20px
+            );
+            border: 2px solid #fff;
+            border-radius: 8px;
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+        }
+
+        /* Chips Styling */
+        .chip {
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5), inset 0 0 0 4px rgba(255,255,255,0.3);
+            border: 4px dashed rgba(255,255,255,0.7);
+            transition: all 0.2s ease;
+            position: relative;
+            aspect-ratio: 1 / 1;
+        }
+
+        .chip:hover {
+            transform: translateY(-5px) scale(1.08);
+            box-shadow: 0 8px 20px rgba(255,215,0,0.5);
+        }
+
+        .chip.active {
+            transform: translateY(-8px) scale(1.15);
+            box-shadow: 0 0 20px #FFD700, inset 0 0 0 4px #fff;
+            border-color: #FFD700;
+        }
+
+        /* Big Road Roadmap Matrix Grid */
+        .roadmap-grid {
+            display: grid;
+            grid-template-rows: repeat(6, 1fr);
+            grid-auto-flow: column;
+            grid-auto-columns: minmax(22px, 1fr);
+            gap: 2px;
+            overflow-x: auto;
+            background-color: #042414;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 6px;
+            padding: 3px;
+        }
+
+        .roadmap-cell {
+            width: 22px;
+            height: 22px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .road-dot {
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 900;
+            color: #fff;
+            box-shadow: inset 0 -2px 4px rgba(0,0,0,0.4);
+        }
+
+        .road-dot.player { background: radial-gradient(circle at 30% 30%, #3b82f6, #1d4ed8); border: 1.5px solid #60a5fa; }
+        .road-dot.banker { background: radial-gradient(circle at 30% 30%, #ef4444, #b91c1c); border: 1.5px solid #f87171; }
+        .road-dot.tie { background: radial-gradient(circle at 30% 30%, #22c55e, #15803d); border: 1.5px solid #4ade80; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 10px;
+        }
+
+        .glass-panel {
+            background: rgba(4, 28, 16, 0.75);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen justify-between p-2 sm:p-4">
+
+    <!-- HEADER NAVBAR -->
+    <header class="glass-panel rounded-2xl p-3 sm:p-4 mb-3 flex flex-wrap justify-between items-center gap-3 gold-border">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full gold-button flex items-center justify-center text-xl font-black shadow-lg">
+                <i class="fa-solid font-black fa-crown text-yellow-950"></i>
+            </div>
+            <div>
+                <h1 class="gold-heading text-lg sm:text-2xl font-black tracking-wider leading-none">BACCARAT VIP</h1>
+                <p class="text-xs text-yellow-300/80 font-medium tracking-widest uppercase mt-0.5">Royal Casino Edition</p>
+            </div>
+        </div>
+
+        <!-- User Information Banner -->
+        <div class="flex items-center gap-3 bg-black/50 px-4 py-2 rounded-xl border border-yellow-500/30">
+            <div class="flex flex-col">
+                <span class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Hội viên VIP:</span>
+                <span id="display-user-name" class="font-extrabold text-yellow-400 text-sm sm:text-base flex items-center gap-1.5">
+                    <!-- Locked Name loaded here -->
+                    <span class="animate-pulse">Đang tải...</span>
+                </span>
+            </div>
+            <div class="h-8 w-px bg-yellow-500/20 mx-1"></div>
+            <div class="flex flex-col">
+                <span class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Số dư khả dụng:</span>
+                <span id="user-balance" class="font-black text-green-400 text-base sm:text-lg tracking-wide">0 ₫</span>
+            </div>
+        </div>
+
+        <!-- Action Header Buttons -->
+        <div class="flex items-center gap-2">
+            <button onclick="openRefillModal()" class="gold-button px-3 py-2 rounded-lg text-xs sm:text-sm flex items-center gap-2">
+                <i class="fa-solid fa-building-columns"></i>
+                <span>Nạp 3 Tỷ</span>
+            </button>
+            <button onclick="openLeaderboardModal()" class="bg-yellow-900/60 hover:bg-yellow-800 text-yellow-300 border border-yellow-500/50 px-3 py-2 rounded-lg text-xs sm:text-sm font-bold flex items-center gap-2 transition">
+                <i class="fa-solid fa-trophy text-yellow-400"></i>
+                <span>BXH</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN GAMING TABLE -->
+    <main class="flex-grow flex flex-col gap-3">
+        <!-- Dealer & Cards Display Area -->
+        <div class="glass-panel rounded-2xl p-4 flex flex-col items-center justify-between relative min-h-[260px] sm:min-h-[300px] border-emerald-600/40 shadow-2xl overflow-hidden">
+            <!-- Background Watermark -->
+            <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
+                <i class="fa-solid fa-gem text-[180px] text-yellow-400"></i>
+            </div>
+
+            <!-- Status Indicator -->
+            <div class="z-10 bg-black/60 px-6 py-1.5 rounded-full border border-yellow-500/40 mb-2">
+                <span id="game-status-text" class="text-yellow-300 font-bold text-xs sm:text-sm tracking-wider uppercase flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-ping"></span>
+                    Sẵn sàng đặt cược
+                </span>
+            </div>
+
+            <!-- Cards Battle Ground -->
+            <div class="w-full grid grid-cols-2 gap-2 sm:gap-6 z-10 my-auto">
+                <!-- PLAYER SIDE -->
+                <div class="flex flex-col items-center bg-blue-950/40 p-3 sm:p-4 rounded-xl border border-blue-500/30">
+                    <div class="flex items-center justify-between w-full mb-2">
+                        <span class="text-blue-400 font-black text-sm sm:text-base tracking-widest flex items-center gap-1.5">
+                            <i class="fa-solid fa-user-shield"></i> CON (PLAYER)
+                        </span>
+                        <span id="player-score" class="bg-blue-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-full shadow">0 Điểm</span>
+                    </div>
+                    <div id="player-cards" class="flex justify-center items-center gap-1 sm:gap-2 min-h-[95px] sm:min-h-[120px]">
+                        <!-- Cards injected by JS -->
+                    </div>
+                </div>
+
+                <!-- BANKER SIDE -->
+                <div class="flex flex-col items-center bg-red-950/40 p-3 sm:p-4 rounded-xl border border-red-500/30">
+                    <div class="flex items-center justify-between w-full mb-2">
+                        <span class="text-red-400 font-black text-sm sm:text-base tracking-widest flex items-center gap-1.5">
+                            <i class="fa-solid fa-crown"></i> CÁI (BANKER)
+                        </span>
+                        <span id="banker-score" class="bg-red-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-full shadow">0 Điểm</span>
+                    </div>
+                    <div id="banker-cards" class="flex justify-center items-center gap-1 sm:gap-2 min-h-[95px] sm:min-h-[120px]">
+                        <!-- Cards injected by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Road Map Summary & Statistics -->
+            <div class="w-full mt-2 z-10">
+                <div class="flex justify-between items-center text-xs text-gray-300 mb-1 px-1 font-semibold">
+                    <span class="flex items-center gap-3">
+                        <span class="text-blue-400">Con: <b id="stat-player-count">0</b></span>
+                        <span class="text-red-400">Cái: <b id="stat-banker-count">0</b></span>
+                        <span class="text-green-400">Hòa: <b id="stat-tie-count">0</b></span>
+                    </span>
+                    <span class="text-yellow-400/80">BẢNG SOI CẦU (BIG ROAD)</span>
+                </div>
+                <!-- Matrix Grid 6 Rows -->
+                <div id="roadmap-container" class="roadmap-grid h-[155px]">
+                    <!-- Generated Cells -->
+                </div>
+            </div>
+        </div>
+
+        <!-- BETTING ZONES -->
+        <div class="grid grid-cols-3 gap-2 sm:gap-4">
+            <!-- BET PLAYER -->
+            <div onclick="placeBet('PLAYER')" class="glass-panel hover:bg-blue-900/30 border-blue-500/40 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-between cursor-pointer transition relative group overflow-hidden active:scale-95">
+                <div class="text-center">
+                    <h3 class="text-blue-400 font-black text-base sm:text-xl tracking-wider">CỬA CON</h3>
+                    <p class="text-[11px] text-blue-300/70 font-bold">1 Trả 1 (1:1)</p>
+                </div>
+                <div class="my-3 text-center">
+                    <span id="bet-amount-PLAYER" class="text-yellow-300 font-black text-sm sm:text-lg block">0 ₫</span>
+                    <span id="user-count-PLAYER" class="text-[10px] text-gray-400 font-semibold"><i class="fa-solid fa-coins"></i> 0 Lượt cược</span>
+                </div>
+                <div class="w-full bg-blue-600/20 text-blue-300 py-1 rounded-lg text-xs font-bold text-center border border-blue-500/30 group-hover:bg-blue-600 group-hover:text-white transition">
+                    ĐẶT CON
+                </div>
+            </div>
+
+            <!-- BET TIE -->
+            <div onclick="placeBet('TIE')" class="glass-panel hover:bg-emerald-900/30 border-emerald-500/40 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-between cursor-pointer transition relative group overflow-hidden active:scale-95">
+                <div class="text-center">
+                    <h3 class="text-green-400 font-black text-base sm:text-xl tracking-wider">CỬA HÒA</h3>
+                    <p class="text-[11px] text-green-300/70 font-bold">1 Trả 8 (1:8)</p>
+                </div>
+                <div class="my-3 text-center">
+                    <span id="bet-amount-TIE" class="text-yellow-300 font-black text-sm sm:text-lg block">0 ₫</span>
+                    <span id="user-count-TIE" class="text-[10px] text-gray-400 font-semibold"><i class="fa-solid fa-coins"></i> 0 Lượt cược</span>
+                </div>
+                <div class="w-full bg-emerald-600/20 text-green-300 py-1 rounded-lg text-xs font-bold text-center border border-emerald-500/30 group-hover:bg-emerald-600 group-hover:text-white transition">
+                    ĐẶT HÒA
+                </div>
+            </div>
+
+            <!-- BET BANKER -->
+            <div onclick="placeBet('BANKER')" class="glass-panel hover:bg-red-900/30 border-red-500/40 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-between cursor-pointer transition relative group overflow-hidden active:scale-95">
+                <div class="text-center">
+                    <h3 class="text-red-400 font-black text-base sm:text-xl tracking-wider">CỬA CÁI</h3>
+                    <p class="text-[11px] text-red-300/70 font-bold">1 Trả 0.95 (5% phế)</p>
+                </div>
+                <div class="my-3 text-center">
+                    <span id="bet-amount-BANKER" class="text-yellow-300 font-black text-sm sm:text-lg block">0 ₫</span>
+                    <span id="user-count-BANKER" class="text-[10px] text-gray-400 font-semibold"><i class="fa-solid fa-coins"></i> 0 Lượt cược</span>
+                </div>
+                <div class="w-full bg-red-600/20 text-red-300 py-1 rounded-lg text-xs font-bold text-center border border-red-500/30 group-hover:bg-red-600 group-hover:text-white transition">
+                    ĐẶT CÁI
+                </div>
+            </div>
+        </div>
+
+        <!-- CHIPS SELECTOR PANEL -->
+        <div class="glass-panel rounded-2xl p-3 flex flex-col gap-2">
+            <div class="flex justify-between items-center px-1">
+                <span class="text-xs text-yellow-300/80 font-bold uppercase tracking-wider">Chọn Phỉnh Cược:</span>
+                <span id="selected-chip-display" class="text-xs font-extrabold text-green-400">Đang chọn: 100M</span>
+            </div>
+            
+            <div class="flex items-center gap-2 overflow-x-auto py-2 px-1" id="chips-container">
+                <!-- Chips dynamically placed by JS for responsive fit -->
+            </div>
+        </div>
+
+        <!-- ACTION CONTROL BUTTONS -->
+        <div class="grid grid-cols-3 gap-3">
+            <button onclick="clearBets()" id="btn-clear" class="bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-600 font-bold py-3 px-2 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 transition active:scale-95">
+                <i class="fa-solid fa-rotate-left"></i> XÓA CƯỢC
+            </button>
+            <button onclick="dealGame()" id="btn-deal" class="gold-button py-3 px-2 rounded-xl text-sm sm:text-base font-black flex items-center justify-center gap-2 tracking-wider col-span-2 shadow-lg">
+                <i class="fa-solid fa-play"></i> MỞ BÀI (DEAL)
+            </button>
+        </div>
+    </main>
+
+    <!-- FOOTER COPYRIGHT -->
+    <footer class="mt-4 text-center text-[11px] text-yellow-600/60 font-semibold">
+        © 2026 Baccarat Royal VIP Casino - GitHub & Vercel Optimized Edition
+    </footer>
+
+    <!-- MODAL 1: PERMANENT NAME REGISTRATION (ONLY SHOWN ONCE) -->
+    <div id="modal-name-setup" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-panel rounded-3xl p-6 max-w-md w-full border-2 border-yellow-500/60 shadow-2xl text-center space-y-4">
+            <div class="w-16 h-16 rounded-full gold-button mx-auto flex items-center justify-center text-3xl">
+                <i class="fa-solid font-black fa-id-card text-yellow-950"></i>
+            </div>
+            <h2 class="gold-heading text-2xl font-black">KHỞI TẠO TÀI KHOẢN VIP</h2>
+            <p class="text-xs text-gray-300 leading-relaxed">
+                Chào mừng bạn đến với <b class="text-yellow-400">Baccarat Royal Casino</b>! Vui lòng nhập tên hiển thị của bạn.
+                <br><span class="text-red-400 font-bold">Lưu ý: Tên chỉ được đặt 1 LẦN DUY NHẤT và không thể thay đổi sau này.</span>
+            </p>
+
+            <div class="text-left space-y-1">
+                <label class="text-xs font-bold text-yellow-300/80 uppercase">Tên Đại Gia / Hiển Thị:</label>
+                <input type="text" id="input-username" maxlength="20" placeholder="Nhập tên của bạn..." 
+                    class="w-full bg-black/60 border border-yellow-500/50 rounded-xl px-4 py-3 text-yellow-200 font-bold placeholder-gray-500 focus:outline-none focus:border-yellow-400">
+            </div>
+
+            <button onclick="submitUsername()" class="gold-button w-full py-3 rounded-xl font-black text-sm tracking-wider shadow-lg">
+                XÁC NHẬN TÊN & NHẬN 3 TỶ VNĐ
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL 2: LEADERBOARD -->
+    <div id="modal-leaderboard" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-panel rounded-3xl p-5 max-w-md w-full border border-yellow-500/50 flex flex-col max-h-[85vh]">
+            <div class="flex justify-between items-center mb-4 pb-2 border-b border-yellow-500/20">
+                <h2 class="gold-heading text-xl font-black flex items-center gap-2">
+                    <i class="fa-solid fa-trophy text-yellow-400"></i> BẢNG XẾP HẠNG TỶ PHÚ
+                </h2>
+                <button onclick="closeLeaderboardModal()" class="text-gray-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <p class="text-[11px] text-gray-300 mb-3 bg-red-950/40 p-2 rounded-lg border border-red-500/30">
+                <i class="fa-solid fa-triangle-exclamation text-red-400"></i> Quy tắc: Tài khoản về <b>0 ₫ (Hết tiền)</b> sẽ bị <b>MẤT TOP KHỎI BXH NGAY LẬP TỨC</b> cho đến khi nạp lại!
+            </p>
+
+            <!-- Leaderboard List -->
+            <div id="leaderboard-list" class="overflow-y-auto space-y-2 flex-grow pr-1">
+                <!-- Dynamically populated -->
+            </div>
+
+            <button onclick="closeLeaderboardModal()" class="mt-4 bg-gray-800 hover:bg-gray-700 text-yellow-400 font-bold py-2 rounded-xl text-xs">
+                ĐÓNG
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL 3: REFILL / CLAIM 3 BILLION -->
+    <div id="modal-refill" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-panel rounded-3xl p-6 max-w-sm w-full border border-yellow-500/50 text-center space-y-4">
+            <div class="w-14 h-14 rounded-full bg-emerald-800/60 border border-emerald-400 mx-auto flex items-center justify-center text-2xl text-emerald-300">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+            </div>
+            <h2 class="gold-heading text-xl font-black">TRỢ CẤP 3 TỶ VNĐ</h2>
+            
+            <div class="bg-black/50 p-3 rounded-xl border border-yellow-500/20 space-y-2 text-xs">
+                <div class="flex justify-between text-gray-300">
+                    <span>Số lượt nhận còn lại:</span>
+                    <b id="refill-count-text" class="text-green-400 font-bold">5/5 Lượt</b>
+                </div>
+                <div class="flex justify-between text-gray-300">
+                    <span>Thời gian làm mới lượt:</span>
+                    <b id="refill-timer-text" class="text-yellow-400 font-bold">24:00:00</b>
+                </div>
+            </div>
+
+            <div class="flex gap-2">
+                <button onclick="closeRefillModal()" class="w-1/2 bg-gray-800 hover:bg-gray-700 text-gray-300 py-2.5 rounded-xl text-xs font-bold">
+                    HỦY BỎ
+                </button>
+                <button onclick="claimRefillMoney()" id="btn-claim-refill" class="w-1/2 gold-button py-2.5 rounded-xl text-xs font-black">
+                    NHẬN 3 TỶ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION TOAST -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-black/90 text-yellow-300 px-5 py-2.5 rounded-full border border-yellow-500/60 text-xs sm:text-sm font-bold shadow-2xl pointer-events-none transition-all duration-300 opacity-0 transform translate-y-4 z-50 flex items-center gap-2">
+        <i class="fa-solid fa-bell text-yellow-400"></i>
+        <span id="toast-message">Thông báo</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC ENGINE -->
+    <script>
+        // CONSTANTS & GAME STATE
+        const INITIAL_BALANCE = 3000000000; // 3 Billion VNĐ
+        const MAX_DAILY_REFILLS = 5;
+        const RESET_TIME_MS = 24 * 60 * 60 * 1000; // 24 Hours
+
+        // Chip Configuration
+        const CHIPS = [
+            { label: '1M', val: 1000000, bg: 'bg-slate-700 text-white' },
+            { label: '10M', val: 10000000, bg: 'bg-blue-700 text-white' },
+            { label: '50M', val: 50000000, bg: 'bg-emerald-700 text-white' },
+            { label: '100M', val: 100000000, bg: 'bg-purple-700 text-white' },
+            { label: '500M', val: 500000000, bg: 'bg-amber-600 text-white' },
+            { label: '1B', val: 1000000000, bg: 'bg-red-700 text-white' },
+            { label: '5B', val: 5000000000, bg: 'bg-yellow-600 text-yellow-950' },
+            { label: '10B', val: 10000000000, bg: 'bg-pink-700 text-white' },
+            { label: '100B', val: 100000000000, bg: 'bg-cyan-700 text-white' },
+            { label: 'TẤT TAY', val: 'ALL_IN', bg: 'bg-gradient-to-r from-red-600 to-yellow-500 text-white' }
+        ];
+
+        // User Data Structure
+        let userData = {
+            username: '',
+            balance: INITIAL_BALANCE,
+            refillsLeft: MAX_DAILY_REFILLS,
+            lastRefillTime: Date.now()
+        };
+
+        // Current Round Bets
+        let currentBets = { PLAYER: 0, BANKER: 0, TIE: 0 };
+        let betCounts = { PLAYER: 0, BANKER: 0, TIE: 0 };
+        let selectedChipValue = 100000000; // Default 100M
+
+        // History / Big Road Roadmap Grid Data
+        let gameHistory = []; 
+        let isDealing = false;
+
+        // Suits and Ranks for Card Deck
+        const SUITS = [
+            { name: 'spades', symbol: '♠', color: 'black' },
+            { name: 'hearts', symbol: '♥', color: 'red' },
+            { name: 'diamonds', symbol: '♦', color: 'red' },
+            { name: 'clubs', symbol: '♣', color: 'black' }
+        ];
+        const RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initGame();
+        });
+
+        function initGame() {
+            loadUserData();
+            renderChips();
+            initRoadmapGrid();
+            updateUI();
+            
+            // Check if username exists, otherwise force modal
+            if (!userData.username) {
+                document.getElementById('modal-name-setup').classList.remove('hidden');
+            }
+        }
+
+        // --- LOCAL STORAGE & DATA SYNC ---
+        function loadUserData() {
+            const saved = localStorage.getItem('baccarat_vip_user');
+            if (saved) {
+                try {
+                    userData = JSON.parse(saved);
+                    // Check 24h reset for refills
+                    if (Date.now() - userData.lastRefillTime > RESET_TIME_MS) {
+                        userData.refillsLeft = MAX_DAILY_REFILLS;
+                        userData.lastRefillTime = Date.now();
+                        saveUserData();
+                    }
+                } catch(e) {
+                    console.error("Lỗi đọc dữ liệu người dùng", e);
+                }
+            }
+
+            // Sync Leaderboard Data System
+            syncLeaderboard();
+        }
+
+        function saveUserData() {
+            localStorage.setItem('baccarat_vip_user', JSON.stringify(userData));
+            syncLeaderboard();
+        }
+
+        // Leaderboard Sync (simulated global sync with local persistence & automatic 0đ removal)
+        function syncLeaderboard() {
+            let leaderboard = JSON.parse(localStorage.getItem('baccarat_vip_global_lb') || '[]');
+
+            if (userData.username) {
+                // RULE: If balance <= 0, remove immediately from leaderboard
+                if (userData.balance <= 0) {
+                    leaderboard = leaderboard.filter(item => item.name !== userData.username);
+                } else {
+                    const existingIndex = leaderboard.findIndex(item => item.name === userData.username);
+                    if (existingIndex !== -1) {
+                        leaderboard[existingIndex].balance = userData.balance;
+                    } else {
+                        leaderboard.push({ name: userData.username, balance: userData.balance });
+                    }
+                }
+            }
+
+            // Filter out any 0 balance users strictly
+            leaderboard = leaderboard.filter(item => item.balance > 0);
+
+            // Sort descending
+            leaderboard.sort((a, b) => b.balance - a.balance);
+
+            localStorage.setItem('baccarat_vip_global_lb', JSON.stringify(leaderboard));
+        }
+
+        // --- USER NAME REGISTRATION (LOCKED ONCE) ---
+        function submitUsername() {
+            const input = document.getElementById('input-username');
+            const name = input.value.trim();
+
+            if (!name) {
+                showToast("Vui lòng nhập tên đại gia của bạn!");
+                return;
+            }
+
+            userData.username = name;
+            userData.balance = INITIAL_BALANCE;
+            userData.refillsLeft = MAX_DAILY_REFILLS;
+            userData.lastRefillTime = Date.now();
+
+            saveUserData();
+            updateUI();
+
+            document.getElementById('modal-name-setup').classList.add('hidden');
+            showToast(`Chào mừng VIP ${name} gia nhập sòng bài!`);
+        }
+
+        // --- UI UPDATERS ---
+        function updateUI() {
+            // Lock name display (NO edit icon)
+            const nameEl = document.getElementById('display-user-name');
+            if (userData.username) {
+                nameEl.innerHTML = `<i class="fa-solid fa-user-check text-yellow-400"></i> ${escapeHTML(userData.username)}`;
+            } else {
+                nameEl.textContent = 'Chưa đăng ký';
+            }
+
+            // Balance
+            document.getElementById('user-balance').textContent = formatCurrency(userData.balance);
+
+            // Refill Count Text
+            document.getElementById('refill-count-text').textContent = `${userData.refillsLeft}/${MAX_DAILY_REFILLS} Lượt`;
+
+            // Bet amounts & Counts
+            ['PLAYER', 'BANKER', 'TIE'].forEach(type => {
+                document.getElementById(`bet-amount-${type}`).textContent = formatCurrency(currentBets[type]);
+                document.getElementById(`user-count-${type}`).innerHTML = `<i class="fa-solid fa-coins"></i> ${betCounts[type]} Lượt cược`;
+            });
+        }
+
+        function renderChips() {
+            const container = document.getElementById('chips-container');
+            container.innerHTML = '';
+
+            CHIPS.forEach(chip => {
+                const isSelected = selectedChipValue === chip.val;
+                const chipEl = document.createElement('div');
+                chipEl.className = `chip min-w-[52px] h-[52px] sm:min-w-[60px] sm:h-[60px] text-[10px] sm:text-xs font-black ${chip.bg} ${isSelected ? 'active' : ''}`;
+                chipEl.textContent = chip.label;
+                chipEl.onclick = () => selectChip(chip.val, chipEl);
+                container.appendChild(chipEl);
+            });
+        }
+
+        function selectChip(val, el) {
+            selectedChipValue = val;
+            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+
+            const display = document.getElementById('selected-chip-display');
+            if (val === 'ALL_IN') {
+                display.textContent = `Đang chọn: TẤT TAY (ALL IN)`;
+            } else {
+                display.textContent = `Đang chọn: ${formatCurrency(val)}`;
+            }
+        }
+
+        // --- BETTING ACTIONS ---
+        function placeBet(type) {
+            if (isDealing) {
+                showToast("Ván bài đang diễn ra, không thể đặt cược!");
+                return;
+            }
+
+            if (userData.balance <= 0) {
+                showToast("Bạn đã hết tiền! Vui lòng nạp thêm 3 Tỷ để tiếp tục.");
+                return;
+            }
+
+            let amountToBet = 0;
+            if (selectedChipValue === 'ALL_IN') {
+                amountToBet = userData.balance;
+            } else {
+                amountToBet = selectedChipValue;
+            }
+
+            if (amountToBet <= 0) return;
+
+            if (userData.balance < amountToBet) {
+                showToast("Số dư không đủ để đặt cược phỉnh này!");
+                return;
+            }
+
+            userData.balance -= amountToBet;
+            currentBets[type] += amountToBet;
+            betCounts[type] += 1;
+
+            saveUserData();
+            updateUI();
+        }
+
+        function clearBets() {
+            if (isDealing) return;
+            
+            const totalRefund = currentBets.PLAYER + currentBets.BANKER + currentBets.TIE;
+            if (totalRefund === 0) return;
+
+            userData.balance += totalRefund;
+            currentBets = { PLAYER: 0, BANKER: 0, TIE: 0 };
+            betCounts = { PLAYER: 0, BANKER: 0, TIE: 0 };
+
+            saveUserData();
+            updateUI();
+            showToast("Đã hoàn lại tất cả tiền cược!");
+        }
+
+        // --- BACCARAT CORE RULES & CARDS ENGINE ---
+        function getRandomCard() {
+            const suit = SUITS[Math.floor(Math.random() * SUITS.length)];
+            const rank = RANKS[Math.floor(Math.random() * RANKS.length)];
+            
+            let value = 0;
+            if (['10', 'J', 'Q', 'K'].includes(rank)) {
+                value = 0;
+            } else if (rank === 'A') {
+                value = 1;
+            } else {
+                value = parseInt(rank);
+            }
+
+            return { suit, rank, value };
+        }
+
+        function calculateHandScore(cards) {
+            const sum = cards.reduce((acc, c) => acc + c.value, 0);
+            return sum % 10;
+        }
+
+        async function dealGame() {
+            if (isDealing) return;
+
+            const totalBet = currentBets.PLAYER + currentBets.BANKER + currentBets.TIE;
+            if (totalBet === 0) {
+                showToast("Vui lòng đặt cược vào ít nhất 1 cửa!");
+                return;
+            }
+
+            isDealing = true;
+            document.getElementById('btn-deal').disabled = true;
+            document.getElementById('btn-clear').disabled = true;
+            
+            // Clear Cards Area
+            const playerCardContainer = document.getElementById('player-cards');
+            const bankerCardContainer = document.getElementById('banker-cards');
+            playerCardContainer.innerHTML = '';
+            bankerCardContainer.innerHTML = '';
+            
+            document.getElementById('player-score').textContent = '0 Điểm';
+            document.getElementById('banker-score').textContent = '0 Điểm';
+            setGameStatus("Đang chia bài...");
+
+            // Initial 2 cards for each
+            let playerCards = [getRandomCard(), getRandomCard()];
+            let bankerCards = [getRandomCard(), getRandomCard()];
+
+            // Animate Deal Initial 4 Cards
+            await renderCardAnimated(playerCardContainer, playerCards[0]);
+            await delay(300);
+            await renderCardAnimated(bankerCardContainer, bankerCards[0]);
+            await delay(300);
+            await renderCardAnimated(playerCardContainer, playerCards[1]);
+            await delay(300);
+            await renderCardAnimated(bankerCardContainer, bankerCards[1]);
+            await delay(300);
+
+            let pScore = calculateHandScore(playerCards);
+            let bScore = calculateHandScore(bankerCards);
+
+            document.getElementById('player-score').textContent = `${pScore} Điểm`;
+            document.getElementById('banker-score').textContent = `${bScore} Điểm`;
+
+            // Standard Baccarat Third Card Rule Logic
+            let playerDraws = false;
+            let playerThirdCardValue = null;
+
+            // Check Natural (8 or 9)
+            if (pScore < 8 && bScore < 8) {
+                // Player Third Card Rule
+                if (pScore <= 5) {
+                    playerDraws = true;
+                    setGameStatus("Con rút lá thứ 3...");
+                    const p3 = getRandomCard();
+                    playerCards.push(p3);
+                    playerThirdCardValue = p3.value;
+                    await renderCardAnimated(playerCardContainer, p3);
+                    pScore = calculateHandScore(playerCards);
+                    document.getElementById('player-score').textContent = `${pScore} Điểm`;
+                    await delay(400);
+                }
+
+                // Banker Third Card Rule
+                let bankerDraws = false;
+                if (!playerDraws) {
+                    if (bScore <= 5) bankerDraws = true;
+                } else {
+                    // Banker rule based on Player's 3rd card
+                    if (bScore <= 2) bankerDraws = true;
+                    else if (bScore === 3 && playerThirdCardValue !== 8) bankerDraws = true;
+                    else if (bScore === 4 && [2,3,4,5,6,7].includes(playerThirdCardValue)) bankerDraws = true;
+                    else if (bScore === 5 && [4,5,6,7].includes(playerThirdCardValue)) bankerDraws = true;
+                    else if (bScore === 6 && [6,7].includes(playerThirdCardValue)) bankerDraws = true;
+                }
+
+                if (bankerDraws) {
+                    setGameStatus("Cái rút lá thứ 3...");
+                    const b3 = getRandomCard();
+                    bankerCards.push(b3);
+                    await renderCardAnimated(bankerCardContainer, b3);
+                    bScore = calculateHandScore(bankerCards);
+                    document.getElementById('banker-score').textContent = `${bScore} Điểm`;
+                    await delay(400);
+                }
+            }
+
+            // Determine Winner
+            let winner = '';
+            if (pScore > bScore) winner = 'PLAYER';
+            else if (bScore > pScore) winner = 'BANKER';
+            else winner = 'TIE';
+
+            // Payout calculation
+            let winAmount = 0;
+            if (winner === 'PLAYER') {
+                winAmount += currentBets.PLAYER * 2; // 1:1 payout + original bet
+            } else if (winner === 'BANKER') {
+                winAmount += currentBets.BANKER * 1.95; // 1:0.95 payout (5% commission) + original bet
+            } else if (winner === 'TIE') {
+                winAmount += currentBets.TIE * 9; // 1:8 payout + original bet
+                // Refund Player and Banker bets on Tie
+                winAmount += currentBets.PLAYER + currentBets.BANKER;
+            }
+
+            userData.balance += winAmount;
+
+            // Record History for Big Road
+            gameHistory.push(winner);
+            updateRoadmapGrid();
+
+            // Result Message
+            let resultText = '';
+            if (winner === 'PLAYER') resultText = 'CỬA CON THẮNG!';
+            else if (winner === 'BANKER') resultText = 'CỬA CÁI THẮNG!';
+            else resultText = 'HÒA (TIE)!';
+
+            if (winAmount > 0) {
+                setGameStatus(`${resultText} Bạn nhận ${formatCurrency(winAmount)}`);
+                showToast(`Kết quả: ${resultText} Thắng ${formatCurrency(winAmount)}`);
+            } else {
+                setGameStatus(`${resultText} Bạn đã thua cược.`);
+            }
+
+            // Reset Round
+            currentBets = { PLAYER: 0, BANKER: 0, TIE: 0 };
+            betCounts = { PLAYER: 0, BANKER: 0, TIE: 0 };
+            
+            saveUserData();
+            updateUI();
+
+            document.getElementById('btn-deal').disabled = false;
+            document.getElementById('btn-clear').disabled = false;
+            isDealing = false;
+        }
+
+        function renderCardAnimated(container, card) {
+            return new Promise((resolve) => {
+                const cardEl = document.createElement('div');
+                cardEl.className = `card ${card.suit.color} transform scale-0 opacity-0`;
+                cardEl.innerHTML = `
+                    <div class="flex justify-between items-center text-xs sm:text-sm font-black">
+                        <span>${card.rank}</span>
+                        <span>${card.suit.symbol}</span>
+                    </div>
+                    <div class="text-center text-xl sm:text-2xl">${card.suit.symbol}</div>
+                    <div class="flex justify-between items-center text-xs sm:text-sm font-black rotate-180">
+                        <span>${card.rank}</span>
+                        <span>${card.suit.symbol}</span>
+                    </div>
+                `;
+                container.appendChild(cardEl);
+
+                setTimeout(() => {
+                    cardEl.classList.remove('scale-0', 'opacity-0');
+                    cardEl.classList.add('scale-100', 'opacity-100');
+                    resolve();
+                }, 50);
+            });
+        }
+
+        // --- ROADMAP BIG ROAD MATRIX GRID ---
+        function initRoadmapGrid() {
+            updateRoadmapGrid();
+        }
+
+        function updateRoadmapGrid() {
+            const container = document.getElementById('roadmap-container');
+            container.innerHTML = '';
+
+            // Calculate Counts
+            let playerCount = gameHistory.filter(x => x === 'PLAYER').length;
+            let bankerCount = gameHistory.filter(x => x === 'BANKER').length;
+            let tieCount = gameHistory.filter(x => x === 'TIE').length;
+
+            document.getElementById('stat-player-count').textContent = playerCount;
+            document.getElementById('stat-banker-count').textContent = bankerCount;
+            document.getElementById('stat-tie-count').textContent = tieCount;
+
+            // Generate Matrix (6 Rows by N Columns)
+            // Layout algorithm for Baccarat Big Road Matrix
+            const rows = 6;
+            let columns = [];
+            let currentCol = [];
+            let lastOutcome = null;
+
+            gameHistory.forEach(outcome => {
+                if (outcome === 'TIE') {
+                    if (currentCol.length > 0) {
+                        currentCol[currentCol.length - 1].isTie = true;
+                    } else {
+                        currentCol.push({ outcome: 'TIE', isTie: true });
+                    }
+                } else {
+                    if (lastOutcome === null || outcome === lastOutcome) {
+                        if (currentCol.length < rows) {
+                            currentCol.push({ outcome: outcome, isTie: false });
+                        } else {
+                            columns.push(currentCol);
+                            currentCol = [{ outcome: outcome, isTie: false }];
+                        }
+                    } else {
+                        if (currentCol.length > 0) {
+                            columns.push(currentCol);
+                        }
+                        currentCol = [{ outcome: outcome, isTie: false }];
+                    }
+                    lastOutcome = outcome;
+                }
+            });
+
+            if (currentCol.length > 0) {
+                columns.push(currentCol);
+            }
+
+            // Fill at least 18 columns for aesthetics
+            const totalCols = Math.max(18, columns.length);
+
+            for (let c = 0; c < totalCols; c++) {
+                const colData = columns[c] || [];
+                for (let r = 0; r < rows; r++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'roadmap-cell';
+
+                    if (colData[r]) {
+                        const dot = document.createElement('div');
+                        const data = colData[r];
+                        let typeClass = data.outcome === 'PLAYER' ? 'player' : (data.outcome === 'BANKER' ? 'banker' : 'tie');
+                        let label = data.outcome === 'PLAYER' ? 'C' : (data.outcome === 'BANKER' ? 'K' : 'H');
+
+                        dot.className = `road-dot ${typeClass}`;
+                        dot.textContent = label;
+                        cell.appendChild(dot);
+                    }
+
+                    container.appendChild(cell);
+                }
+            }
+        }
+
+        // --- REFILL & REWARD SYSTEM (3 BILLION - 5 TIMES/24H) ---
+        function openRefillModal() {
+            document.getElementById('modal-refill').classList.remove('hidden');
+        }
+
+        function closeRefillModal() {
+            document.getElementById('modal-refill').classList.add('hidden');
+        }
+
+        function claimRefillMoney() {
+            if (userData.refillsLeft <= 0) {
+                showToast("Bạn đã hết 5 lượt nhận tiền trợ cấp trong 24h!");
+                return;
+            }
+
+            userData.balance += INITIAL_BALANCE; // +3 Billion
+            userData.refillsLeft -= 1;
+            
+            saveUserData();
+            updateUI();
+            closeRefillModal();
+
+            showToast("Thành công! Bạn đã nhận 3 Tỷ VNĐ vào tài khoản.");
+        }
+
+        // --- LEADERBOARD SYSTEM ---
+        function openLeaderboardModal() {
+            renderLeaderboard();
+            document.getElementById('modal-leaderboard').classList.remove('hidden');
+        }
+
+        function closeLeaderboardModal() {
+            document.getElementById('modal-leaderboard').classList.add('hidden');
+        }
+
+        function renderLeaderboard() {
+            syncLeaderboard();
+            const listEl = document.getElementById('leaderboard-list');
+            listEl.innerHTML = '';
+
+            const leaderboard = JSON.parse(localStorage.getItem('baccarat_vip_global_lb') || '[]');
+
+            if (leaderboard.length === 0) {
+                listEl.innerHTML = `<div class="text-center text-gray-400 py-6 text-xs">Chưa có tỷ phú nào trên bảng xếp hạng (Hoặc tất cả đã hết tiền)</div>`;
+                return;
+            }
+
+            leaderboard.forEach((item, index) => {
+                const isMe = item.name === userData.username;
+                const itemEl = document.createElement('div');
+                itemEl.className = `flex justify-between items-center p-2.5 rounded-xl border ${isMe ? 'bg-yellow-500/20 border-yellow-500/60' : 'bg-black/40 border-yellow-500/10'}`;
+
+                let rankBadge = `<span class="w-6 h-6 rounded-full bg-gray-800 text-gray-300 font-bold text-xs flex items-center justify-center">${index + 1}</span>`;
+                if (index === 0) rankBadge = `<span class="w-6 h-6 rounded-full bg-yellow-500 text-yellow-950 font-black text-xs flex items-center justify-center"><i class="fa-solid fa-crown"></i></span>`;
+                else if (index === 1) rankBadge = `<span class="w-6 h-6 rounded-full bg-slate-300 text-slate-900 font-black text-xs flex items-center justify-center">2</span>`;
+                else if (index === 2) rankBadge = `<span class="w-6 h-6 rounded-full bg-amber-700 text-white font-black text-xs flex items-center justify-center">3</span>`;
+
+                itemEl.innerHTML = `
+                    <div class="flex items-center gap-2.5">
+                        ${rankBadge}
+                        <span class="font-bold text-xs sm:text-sm ${isMe ? 'text-yellow-300' : 'text-gray-200'}">
+                            ${escapeHTML(item.name)} ${isMe ? '<span class="text-[10px] text-yellow-400 font-normal">(Bạn)</span>' : ''}
+                        </span>
+                    </div>
+                    <span class="font-black text-xs sm:text-sm text-green-400">${formatCurrency(item.balance)}</span>
+                `;
+                listEl.appendChild(itemEl);
+            });
+        }
+
+        // --- HELPER UTILITIES ---
+        function setGameStatus(msg) {
+            document.getElementById('game-status-text').innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-yellow-400 animate-ping"></span> ${msg}`;
+        }
+
+        function formatCurrency(amount) {
+            if (amount >= 1000000000) {
+                return (amount / 1000000000).toFixed(amount % 1000000000 === 0 ? 0 : 2) + ' Tỷ ₫';
+            } else if (amount >= 1000000) {
+                return (amount / 1000000).toFixed(amount % 1000000 === 0 ? 0 : 1) + ' Tr ₫';
+            }
+            return amount.toLocaleString('vi-VN') + ' ₫';
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = msg;
+            toast.classList.remove('opacity-0', 'translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-4');
+            }, 3000);
+        }
+
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+            );
+        }
+    </script>
+</body>
+</html>

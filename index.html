@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baccarat VIP Casino 3 Tỷ</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Montserrat & Cinzel -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            DEFAULT: '#D4AF37',
+                            light: '#F3E5AB',
+                            dark: '#AA7C11'
+                        },
+                        poker: {
+                            green: '#0F522E',
+                            darkgreen: '#072A17',
+                            red: '#B22222',
+                            blue: '#1E3A8A'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: radial-gradient(circle at center, #13251a 0%, #08100b 100%);
+            color: #ffffff;
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        /* Gold metallic text effect */
+        .gold-text {
+            background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border {
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7) 1;
+        }
+
+        /* Felt table felt background effect */
+        .table-felt {
+            background: radial-gradient(circle, #1a6d3f 0%, #0d4224 80%, #082916 100%);
+            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8), 0 10px 30px rgba(0,0,0,0.7);
+        }
+
+        /* Card styles & 3D Flip */
+        .card-container {
+            perspective: 1000px;
+            width: 75px;
+            height: 110px;
+        }
+        
+        @media (min-width: 640px) {
+            .card-container {
+                width: 90px;
+                height: 130px;
+            }
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            border-radius: 8px;
+        }
+
+        .card-container.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 5px 8px;
+            box-sizing: border-box;
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border: 2px solid #ffffff;
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 10px, transparent 0, transparent 20px);
+            transform: rotateY(0deg);
+        }
+
+        .card-front {
+            background-color: #ffffff;
+            color: #000000;
+            transform: rotateY(180deg);
+            border: 1px solid #ccc;
+        }
+
+        .card-front.red {
+            color: #d32f2f;
+        }
+
+        /* Chip styling */
+        .chip {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 11px;
+            cursor: pointer;
+            position: relative;
+            border: 4px dashed #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), inset 0 0 8px rgba(0, 0, 0, 0.6);
+            transition: all 0.2s ease;
+        }
+
+        @media (min-width: 640px) {
+            .chip {
+                width: 58px;
+                height: 58px;
+                font-size: 13px;
+            }
+        }
+
+        .chip:hover {
+            transform: translateY(-5px) scale(1.08);
+        }
+
+        .chip.active {
+            transform: translateY(-8px) scale(1.15);
+            box-shadow: 0 0 15px #f39c12, inset 0 0 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .chip-1m { background: radial-gradient(circle, #3498db, #1d6fa5); color: white; }
+        .chip-10m { background: radial-gradient(circle, #2ecc71, #199d52); color: white; }
+        .chip-50m { background: radial-gradient(circle, #e67e22, #a85810); color: white; }
+        .chip-100m { background: radial-gradient(circle, #9b59b6, #6c3483); color: white; }
+        .chip-500m { background: radial-gradient(circle, #e74c3c, #962d22); color: white; }
+        .chip-allin { background: radial-gradient(circle, #f1c40f, #b7950b); color: black; border-color: #000; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 10px;
+        }
+
+        /* Bet placement highlight */
+        .bet-area {
+            transition: all 0.3s ease;
+        }
+        .bet-area:hover {
+            background-color: rgba(212, 175, 55, 0.15);
+        }
+
+        /* Animation for chip drop */
+        @keyframes chipPlace {
+            0% { transform: scale(1.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .placed-chip {
+            animation: chipPlace 0.2s ease-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-2 sm:p-4 overflow-x-hidden">
+
+    <!-- TOP BAR -->
+    <header class="w-full max-w-6xl mx-auto bg-black/60 border border-yellow-600/40 rounded-xl p-3 mb-3 backdrop-blur-md flex flex-wrap justify-between items-center gap-3 shadow-2xl">
+        <div class="flex items-center gap-3">
+            <i class="fa-solid font-serif text-3xl text-yellow-400 fa-gem"></i>
+            <div>
+                <h1 class="font-serif text-xl sm:text-2xl font-bold gold-text tracking-wider">ROYAL BACCARAT</h1>
+                <p class="text-xs text-gray-400">Sòng Bạc Thượng Lưu - Tiền Ảo VIP</p>
+            </div>
+        </div>
+
+        <!-- Balance Info -->
+        <div class="flex items-center gap-4 ml-auto sm:ml-0">
+            <div class="bg-gradient-to-r from-yellow-900/40 to-black/80 border border-yellow-500/50 px-4 py-1.5 rounded-lg text-right">
+                <span class="text-xs text-yellow-300/80 block font-semibold">SỐ DƯ CỦA BẠN</span>
+                <span id="balance-display" class="text-lg sm:text-2xl font-bold text-yellow-400 font-mono">3.000.000.000 ₫</span>
+            </div>
+            
+            <button id="btn-reload" onclick="reloadBalance()" class="hidden bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-bold py-2 px-3 rounded-lg text-xs shadow-lg flex items-center gap-1 transition">
+                <i class="fa-solid fa-rotate-right"></i> Nạp lại 3 Tỷ
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN GAME CASINO BOARD -->
+    <main class="w-full max-w-6xl mx-auto flex-1 flex flex-col justify-center">
+        <div class="table-felt rounded-3xl border-4 border-yellow-600/70 p-3 sm:p-6 relative shadow-2xl flex flex-col justify-between gap-4">
+            
+            <!-- DEALER & CARD CAROUSEL AREA -->
+            <div class="flex justify-between items-start gap-2 sm:gap-4 bg-black/40 p-3 sm:p-4 rounded-2xl border border-white/10 backdrop-blur-sm">
+                <!-- PLAYER SIDE CARDS -->
+                <div class="flex-1 flex flex-col items-center">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="px-3 py-1 bg-blue-600/80 text-white font-bold text-xs sm:text-sm rounded-full tracking-wider shadow">PLAYER (NGƯỜI CHƠI)</span>
+                        <span id="player-score" class="hidden bg-blue-900/90 text-yellow-300 font-bold px-2.5 py-0.5 rounded-md border border-blue-400 text-sm">0 Điểm</span>
+                    </div>
+                    <div id="player-cards" class="flex gap-2 justify-center min-h-[110px] sm:min-h-[130px] items-center">
+                        <!-- Dynamic Player Cards -->
+                        <div class="text-gray-500 text-xs italic">Chờ chia bài...</div>
+                    </div>
+                </div>
+
+                <!-- VS / STATUS DISPLAY -->
+                <div class="flex flex-col items-center justify-center pt-4">
+                    <div class="w-10 h-10 rounded-full bg-yellow-500/20 border border-yellow-500 flex items-center justify-center font-bold text-yellow-400 font-serif text-sm">
+                        VS
+                    </div>
+                    <div id="game-status" class="mt-2 text-center text-xs font-semibold text-yellow-200/80 max-w-[120px]">
+                        Hãy đặt cược để bắt đầu ván mới
+                    </div>
+                </div>
+
+                <!-- BANKER SIDE CARDS -->
+                <div class="flex-1 flex flex-col items-center">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span id="banker-score" class="hidden bg-red-900/90 text-yellow-300 font-bold px-2.5 py-0.5 rounded-md border border-red-400 text-sm">0 Điểm</span>
+                        <span class="px-3 py-1 bg-red-600/80 text-white font-bold text-xs sm:text-sm rounded-full tracking-wider shadow">BANKER (NHÀ CÁI)</span>
+                    </div>
+                    <div id="banker-cards" class="flex gap-2 justify-center min-h-[110px] sm:min-h-[130px] items-center">
+                        <!-- Dynamic Banker Cards -->
+                        <div class="text-gray-500 text-xs italic">Chờ chia bài...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BETTING TABLE LAYOUT -->
+            <div class="grid grid-cols-3 gap-2 sm:gap-4 my-2">
+                <!-- PLAYER BET AREA -->
+                <div onclick="placeBet('player')" class="bet-area bg-blue-950/40 hover:bg-blue-900/50 border-2 border-blue-500/50 rounded-2xl p-3 sm:p-5 text-center cursor-pointer relative min-h-[140px] flex flex-col justify-between items-center transition shadow-lg">
+                    <div class="font-bold text-blue-400 text-base sm:text-xl font-serif">PLAYER</div>
+                    <div class="text-xs text-blue-200/70 font-semibold">Tỷ lệ 1 : 1</div>
+                    
+                    <!-- Chips Container on Player Area -->
+                    <div id="bet-chips-player" class="min-h-[40px] flex flex-wrap items-center justify-center gap-1 my-1"></div>
+                    
+                    <div class="text-xs font-bold text-yellow-300 bg-black/40 px-3 py-1 rounded-full border border-blue-400/30">
+                        Cược: <span id="bet-amount-player">0</span> ₫
+                    </div>
+                </div>
+
+                <!-- TIE BET AREA -->
+                <div onclick="placeBet('tie')" class="bet-area bg-emerald-950/40 hover:bg-emerald-900/50 border-2 border-emerald-500/50 rounded-2xl p-3 sm:p-5 text-center cursor-pointer relative min-h-[140px] flex flex-col justify-between items-center transition shadow-lg">
+                    <div class="font-bold text-emerald-400 text-base sm:text-xl font-serif">TIE (HÒA)</div>
+                    <div class="text-xs text-emerald-200/70 font-semibold">Tỷ lệ 1 : 8</div>
+                    
+                    <!-- Chips Container on Tie Area -->
+                    <div id="bet-chips-tie" class="min-h-[40px] flex flex-wrap items-center justify-center gap-1 my-1"></div>
+                    
+                    <div class="text-xs font-bold text-yellow-300 bg-black/40 px-3 py-1 rounded-full border border-emerald-400/30">
+                        Cược: <span id="bet-amount-tie">0</span> ₫
+                    </div>
+                </div>
+
+                <!-- BANKER BET AREA -->
+                <div onclick="placeBet('banker')" class="bet-area bg-red-950/40 hover:bg-red-900/50 border-2 border-red-500/50 rounded-2xl p-3 sm:p-5 text-center cursor-pointer relative min-h-[140px] flex flex-col justify-between items-center transition shadow-lg">
+                    <div class="font-bold text-red-400 text-base sm:text-xl font-serif">BANKER</div>
+                    <div class="text-xs text-red-200/70 font-semibold">Tỷ lệ 1 : 0.95 (5% phế)</div>
+                    
+                    <!-- Chips Container on Banker Area -->
+                    <div id="bet-chips-banker" class="min-h-[40px] flex flex-wrap items-center justify-center gap-1 my-1"></div>
+                    
+                    <div class="text-xs font-bold text-yellow-300 bg-black/40 px-3 py-1 rounded-full border border-red-400/30">
+                        Cược: <span id="bet-amount-banker">0</span> ₫
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHIP SELECTOR & ACTIONS -->
+            <div class="bg-black/60 rounded-2xl p-3 border border-yellow-600/30 flex flex-col lg:flex-row justify-between items-center gap-4">
+                
+                <!-- Chips Selection -->
+                <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-3">
+                    <div onclick="selectChip(1000000, this)" class="chip chip-1m active">1M</div>
+                    <div onclick="selectChip(10000000, this)" class="chip chip-10m">10M</div>
+                    <div onclick="selectChip(50000000, this)" class="chip chip-50m">50M</div>
+                    <div onclick="selectChip(100000000, this)" class="chip chip-100m">100M</div>
+                    <div onclick="selectChip(500000000, this)" class="chip chip-500m">500M</div>
+                    <div onclick="selectChip('ALL', this)" class="chip chip-allin">ALL IN</div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-2 w-full lg:w-auto justify-center">
+                    <button id="btn-clear" onclick="clearBets()" class="flex-1 lg:flex-none px-4 py-2.5 bg-gray-700 hover:bg-gray-600 text-white font-bold rounded-xl text-xs sm:text-sm transition shadow flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-trash-can"></i> Xóa Đặt
+                    </button>
+                    <button id="btn-deal" onclick="startDeal()" class="flex-1 lg:flex-none px-8 py-2.5 bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 hover:brightness-110 text-black font-extrabold rounded-xl text-sm sm:text-base tracking-wide shadow-lg transition transform active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-play"></i> CHIA BÀI
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ROADMAP & STATISTICS FOOTER -->
+    <footer class="w-full max-w-6xl mx-auto mt-3 grid grid-cols-1 md:grid-cols-3 gap-3">
+        <!-- Big Road (Cầu Baccarat) -->
+        <div class="md:col-span-2 bg-black/60 border border-white/10 rounded-xl p-3 backdrop-blur-md">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-bold text-yellow-400 flex items-center gap-1 font-serif">
+                    <i class="fa-solid fa-chart-line"></i> BẢNG SOI CẦU (BIG ROAD)
+                </span>
+                <span class="text-[10px] text-gray-400">Hiển thị tối đa 30 ván gần nhất</span>
+            </div>
+            <!-- Roadmap Grid Container -->
+            <div id="roadmap-container" class="w-full overflow-x-auto flex gap-1 p-2 bg-black/40 rounded-lg min-h-[60px] items-center">
+                <div class="text-xs text-gray-500 italic mx-auto">Chưa có dữ liệu ván đấu nào...</div>
+            </div>
+        </div>
+
+        <!-- Stats & History Summary -->
+        <div class="bg-black/60 border border-white/10 rounded-xl p-3 backdrop-blur-md flex flex-col justify-between">
+            <span class="text-xs font-bold text-yellow-400 mb-1 flex items-center gap-1 font-serif">
+                <i class="fa-solid fa-chart-pie"></i> THỐNG KÊ TRẬN ĐẤU
+            </span>
+            <div class="grid grid-cols-3 gap-2 text-center my-1">
+                <div class="bg-blue-950/40 p-1.5 rounded-lg border border-blue-500/30">
+                    <div class="text-[10px] text-blue-300">PLAYER</div>
+                    <div id="stat-player-count" class="font-bold text-sm text-blue-400">0</div>
+                </div>
+                <div class="bg-emerald-950/40 p-1.5 rounded-lg border border-emerald-500/30">
+                    <div class="text-[10px] text-emerald-300">TIE</div>
+                    <div id="stat-tie-count" class="font-bold text-sm text-emerald-400">0</div>
+                </div>
+                <div class="bg-red-950/40 p-1.5 rounded-lg border border-red-500/30">
+                    <div class="text-[10px] text-red-300">BANKER</div>
+                    <div id="stat-banker-count" class="font-bold text-sm text-red-400">0</div>
+                </div>
+            </div>
+            <div class="flex justify-between items-center text-xs text-gray-300 mt-1 border-t border-white/10 pt-1">
+                <span>Tổng số ván: <strong id="stat-total-games" class="text-white">0</strong></span>
+                <span>Tỷ lệ thắng: <strong id="stat-win-rate" class="text-yellow-400">0%</strong></span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- GAME CONSTANTS & STATE ---
+        const INITIAL_BALANCE = 3000000000; // 3 Tỷ
+        let balance = INITIAL_BALANCE;
+        let selectedChipValue = 1000000; // Mặc định 1M
+        
+        let currentBets = {
+            player: 0,
+            tie: 0,
+            banker: 0
+        };
+
+        let stats = {
+            totalGames: 0,
+            playerWins: 0,
+            bankerWins: 0,
+            ties: 0,
+            userWins: 0
+        };
+
+        let historyRoadmap = []; // Stores result strings: 'player', 'banker', 'tie'
+        let isDealing = false;
+
+        // Card Deck Definition
+        const SUITS = [
+            { name: 'spades', symbol: '♠', color: 'black' },
+            { name: 'hearts', symbol: '♥', color: 'red' },
+            { name: 'diamonds', symbol: '♦', color: 'red' },
+            { name: 'clubs', symbol: '♣', color: 'black' }
+        ];
+
+        const VALUES = [
+            { code: 'A', val: 1 },
+            { code: '2', val: 2 },
+            { code: '3', val: 3 },
+            { code: '4', val: 4 },
+            { code: '5', val: 5 },
+            { code: '6', val: 6 },
+            { code: '7', val: 7 },
+            { code: '8', val: 8 },
+            { code: '9', val: 9 },
+            { code: '10', val: 0 },
+            { code: 'J', val: 0 },
+            { code: 'Q', val: 0 },
+            { code: 'K', val: 0 }
+        ];
+
+        let deck = [];
+
+        // --- HELPER FUNCTIONS ---
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN').format(amount) + ' ₫';
+        }
+
+        function createDeck() {
+            let newDeck = [];
+            // Create 8 decks of standard cards (Standard Baccarat Shoe)
+            for (let d = 0; d < 8; d++) {
+                for (let suit of SUITS) {
+                    for (let val of VALUES) {
+                        newDeck.push({ suit: suit, value: val });
+                    }
+                }
+            }
+            // Shuffle
+            for (let i = newDeck.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newDeck[i], newDeck[j]] = [newDeck[j], newDeck[i]];
+            }
+            return newDeck;
+        }
+
+        function getCardScore(cards) {
+            let total = cards.reduce((sum, card) => sum + card.value.val, 0);
+            return total % 10;
+        }
+
+        // --- UI UPDATERS ---
+        function updateBalanceDisplay() {
+            document.getElementById('balance-display').innerText = formatCurrency(balance);
+            
+            // Show Reload button if balance is zero and no active bets
+            const totalBet = currentBets.player + currentBets.tie + currentBets.banker;
+            if (balance === 0 && totalBet === 0 && !isDealing) {
+                document.getElementById('btn-reload').classList.remove('hidden');
+            } else {
+                document.getElementById('btn-reload').classList.add('hidden');
+            }
+        }
+
+        function updateBetDisplays() {
+            document.getElementById('bet-amount-player').innerText = formatCurrency(currentBets.player).replace(' ₫', '');
+            document.getElementById('bet-amount-tie').innerText = formatCurrency(currentBets.tie).replace(' ₫', '');
+            document.getElementById('bet-amount-banker').innerText = formatCurrency(currentBets.banker).replace(' ₫', '');
+        }
+
+        function selectChip(val, element) {
+            if (isDealing) return;
+            
+            selectedChipValue = val;
+            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function placeBet(area) {
+            if (isDealing) return;
+
+            let amountToBet = 0;
+            if (selectedChipValue === 'ALL') {
+                amountToBet = balance;
+            } else {
+                amountToBet = selectedChipValue;
+            }
+
+            if (amountToBet <= 0) return;
+
+            if (balance < amountToBet) {
+                showToast('Số dư không đủ để đặt cược!');
+                return;
+            }
+
+            balance -= amountToBet;
+            currentBets[area] += amountToBet;
+
+            // Render Chip Visual in Bet Box
+            renderBetChipVisual(area);
+
+            updateBalanceDisplay();
+            updateBetDisplays();
+        }
+
+        function renderBetChipVisual(area) {
+            const container = document.getElementById(`bet-chips-${area}`);
+            const chipElem = document.createElement('div');
+            chipElem.className = 'placed-chip text-[9px] bg-yellow-400 text-black font-extrabold px-1.5 py-0.5 rounded-full border border-black shadow';
+            
+            let label = 'Chip';
+            if (selectedChipValue === 'ALL') label = 'ALL';
+            else if (selectedChipValue >= 1000000000) label = (selectedChipValue / 1000000000) + 'B';
+            else if (selectedChipValue >= 1000000) label = (selectedChipValue / 1000000) + 'M';
+
+            chipElem.innerText = label;
+            container.appendChild(chipElem);
+        }
+
+        function clearBets() {
+            if (isDealing) return;
+
+            // Refund bets
+            balance += currentBets.player + currentBets.tie + currentBets.banker;
+            currentBets.player = 0;
+            currentBets.tie = 0;
+            currentBets.banker = 0;
+
+            document.getElementById('bet-chips-player').innerHTML = '';
+            document.getElementById('bet-chips-tie').innerHTML = '';
+            document.getElementById('bet-chips-banker').innerHTML = '';
+
+            updateBalanceDisplay();
+            updateBetDisplays();
+        }
+
+        function reloadBalance() {
+            if (balance === 0) {
+                balance = INITIAL_BALANCE;
+                updateBalanceDisplay();
+                showToast('Đã nạp lại 3 Tỷ tiền ảo thành công!');
+            }
+        }
+
+        function showToast(msg) {
+            document.getElementById('game-status').innerText = msg;
+        }
+
+        // --- BACCARAT DEAL ENGINE ---
+        async function startDeal() {
+            const totalBet = currentBets.player + currentBets.tie + currentBets.banker;
+            if (totalBet === 0) {
+                showToast('Vui lòng đặt cược trước khi chia bài!');
+                return;
+            }
+
+            if (isDealing) return;
+            isDealing = true;
+
+            // Lock Action Buttons
+            document.getElementById('btn-deal').disabled = true;
+            document.getElementById('btn-clear').disabled = true;
+            showToast('Đang chia bài...');
+
+            // Clear Card Area
+            const playerCardsContainer = document.getElementById('player-cards');
+            const bankerCardsContainer = document.getElementById('banker-cards');
+            playerCardsContainer.innerHTML = '';
+            bankerCardsContainer.innerHTML = '';
+
+            document.getElementById('player-score').classList.add('hidden');
+            document.getElementById('banker-score').classList.add('hidden');
+
+            if (deck.length < 20) {
+                deck = createDeck();
+            }
+
+            let playerCards = [deck.pop(), deck.pop()];
+            let bankerCards = [deck.pop(), deck.pop()];
+
+            // 1. Deal Initial 2 Cards each sequentially
+            await renderCard(playerCards[0], playerCardsContainer);
+            await delay(300);
+            await renderCard(bankerCards[0], bankerCardsContainer);
+            await delay(300);
+            await renderCard(playerCards[1], playerCardsContainer);
+            await delay(300);
+            await renderCard(bankerCards[1], bankerCardsContainer);
+            await delay(400);
+
+            let pScore = getCardScore(playerCards);
+            let bScore = getCardScore(bankerCards);
+
+            updateScoresUI(pScore, bScore);
+
+            // 2. Check for Natural Win (8 or 9)
+            let isNatural = (pScore >= 8 || bScore >= 8);
+
+            if (!isNatural) {
+                // 3. Player Third Card Rule
+                let playerThirdCard = null;
+                if (pScore <= 5) {
+                    showToast('Player rút lá thứ 3...');
+                    await delay(600);
+                    playerThirdCard = deck.pop();
+                    playerCards.push(playerThirdCard);
+                    await renderCard(playerThirdCard, playerCardsContainer);
+                    pScore = getCardScore(playerCards);
+                    updateScoresUI(pScore, bScore);
+                }
+
+                // 4. Banker Third Card Rule
+                let bankerDraws = false;
+                if (!playerThirdCard) {
+                    // Player stood (had 6 or 7) -> Banker draws if score <= 5
+                    if (bScore <= 5) bankerDraws = true;
+                } else {
+                    // Standard Baccarat Banker Draw Matrix based on Player's 3rd card value
+                    let p3Val = playerThirdCard.value.val;
+                    if (bScore <= 2) bankerDraws = true;
+                    else if (bScore === 3 && p3Val !== 8) bankerDraws = true;
+                    else if (bScore === 4 && (p3Val >= 2 && p3Val <= 7)) bankerDraws = true;
+                    else if (bScore === 5 && (p3Val >= 4 && p3Val <= 7)) bankerDraws = true;
+                    else if (bScore === 6 && (p3Val === 6 || p3Val === 7)) bankerDraws = true;
+                }
+
+                if (bankerDraws) {
+                    showToast('Banker rút lá thứ 3...');
+                    await delay(600);
+                    let bankerThirdCard = deck.pop();
+                    bankerCards.push(bankerThirdCard);
+                    await renderCard(bankerThirdCard, bankerCardsContainer);
+                    bScore = getCardScore(bankerCards);
+                    updateScoresUI(pScore, bScore);
+                }
+            }
+
+            // 5. Determine Result & Pay Payouts
+            await delay(500);
+            evaluateWinner(pScore, bScore);
+
+            // Reset Round
+            isDealing = false;
+            document.getElementById('btn-deal').disabled = false;
+            document.getElementById('btn-clear').disabled = false;
+            updateBalanceDisplay();
+        }
+
+        function updateScoresUI(pScore, bScore) {
+            const pElem = document.getElementById('player-score');
+            const bElem = document.getElementById('banker-score');
+            pElem.classList.remove('hidden');
+            bElem.classList.remove('hidden');
+            pElem.innerText = `${pScore} Điểm`;
+            bElem.innerText = `${bScore} Điểm`;
+        }
+
+        function renderCard(card, container) {
+            return new Promise((resolve) => {
+                const cardWrapper = document.createElement('div');
+                cardWrapper.className = 'card-container';
+
+                const cardInner = document.createElement('div');
+                cardInner.className = 'card-inner';
+
+                const cardBack = document.createElement('div');
+                cardBack.className = 'card-back';
+
+                const cardFront = document.createElement('div');
+                cardFront.className = `card-front ${card.suit.color}`;
+
+                cardFront.innerHTML = `
+                    <div class="text-left font-bold text-xs sm:text-sm leading-none">${card.value.code}<br>${card.suit.symbol}</div>
+                    <div class="text-center text-xl sm:text-2xl">${card.suit.symbol}</div>
+                    <div class="text-right font-bold text-xs sm:text-sm leading-none">${card.value.code}<br>${card.suit.symbol}</div>
+                `;
+
+                cardInner.appendChild(cardBack);
+                cardInner.appendChild(cardFront);
+                cardWrapper.appendChild(cardInner);
+                container.appendChild(cardWrapper);
+
+                // Trigger 3D Flip effect
+                setTimeout(() => {
+                    cardWrapper.classList.add('flipped');
+                    resolve();
+                }, 100);
+            });
+        }
+
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function evaluateWinner(pScore, bScore) {
+            let result = ''; // 'player', 'banker', 'tie'
+            let totalWinnings = 0;
+
+            if (pScore > bScore) {
+                result = 'player';
+                showToast('PLAYER THẮNG!');
+            } else if (bScore > pScore) {
+                result = 'banker';
+                showToast('BANKER THẮNG!');
+            } else {
+                result = 'tie';
+                showToast('HÒA (TIE)!');
+            }
+
+            // Calculate Payouts
+            if (result === 'player' && currentBets.player > 0) {
+                totalWinnings += currentBets.player * 2; // 1:1 payout + original bet
+            }
+            if (result === 'banker' && currentBets.banker > 0) {
+                totalWinnings += currentBets.banker * 1.95; // 1:0.95 payout + original bet
+            }
+            if (result === 'tie') {
+                if (currentBets.tie > 0) {
+                    totalWinnings += currentBets.tie * 9; // 1:8 payout + original bet
+                }
+                // Return original Player & Banker bets on Tie
+                totalWinnings += currentBets.player + currentBets.banker;
+            }
+
+            if (totalWinnings > 0) {
+                balance += totalWinnings;
+                stats.userWins++;
+            }
+
+            // Update Stats & Roadmap
+            stats.totalGames++;
+            if (result === 'player') stats.playerWins++;
+            if (result === 'banker') stats.bankerWins++;
+            if (result === 'tie') stats.ties++;
+
+            historyRoadmap.push(result);
+            if (historyRoadmap.length > 30) historyRoadmap.shift();
+
+            // Clear Bets for next round
+            currentBets.player = 0;
+            currentBets.tie = 0;
+            currentBets.banker = 0;
+            document.getElementById('bet-chips-player').innerHTML = '';
+            document.getElementById('bet-chips-tie').innerHTML = '';
+            document.getElementById('bet-chips-banker').innerHTML = '';
+
+            updateBetDisplays();
+            updateRoadmapUI();
+            updateStatsUI();
+        }
+
+        function updateRoadmapUI() {
+            const container = document.getElementById('roadmap-container');
+            container.innerHTML = '';
+
+            if (historyRoadmap.length === 0) {
+                container.innerHTML = '<div class="text-xs text-gray-500 italic mx-auto">Chưa có dữ liệu ván đấu nào...</div>';
+                return;
+            }
+
+            historyRoadmap.forEach(res => {
+                const node = document.createElement('div');
+                node.className = 'w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 shadow border border-white/20';
+                
+                if (res === 'player') {
+                    node.className += ' bg-blue-600 text-white';
+                    node.innerText = 'P';
+                } else if (res === 'banker') {
+                    node.className += ' bg-red-600 text-white';
+                    node.innerText = 'B';
+                } else {
+                    node.className += ' bg-emerald-600 text-white';
+                    node.innerText = 'T';
+                }
+
+                container.appendChild(node);
+            });
+        }
+
+        function updateStatsUI() {
+            document.getElementById('stat-player-count').innerText = stats.playerWins;
+            document.getElementById('stat-tie-count').innerText = stats.ties;
+            document.getElementById('stat-banker-count').innerText = stats.bankerWins;
+            document.getElementById('stat-total-games').innerText = stats.totalGames;
+
+            let winRate = stats.totalGames > 0 ? Math.round((stats.userWins / stats.totalGames) * 100) : 0;
+            document.getElementById('stat-win-rate').innerText = winRate + '%';
+        }
+
+        // Initialize Game Deck on Load
+        window.onload = function() {
+            deck = createDeck();
+            updateBalanceDisplay();
+            updateBetDisplays();
+        }
+    </script>
+</body>
+</html>
